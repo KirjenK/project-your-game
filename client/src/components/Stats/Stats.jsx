@@ -1,26 +1,37 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react/jsx-one-expression-per-line */
+import React, { useEffect, useState } from 'react';
 
-function Stats() {
-  // useEffect(() => {
-  //   const abortController = new AbortController();
+export default function Stats() {
+  const [stat, setStat] = useState([]);
 
-  //   fetch('http://localhost:3001/stat', {
-  //     credentials: 'include',
-  //     signal: abortController.signal,
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       dispatch({ type: 'GET_CANDIDATES', payload: data });
-  //     })
-  //     .catch(console.log);
+  useEffect(() => {
+    const abortController = new AbortController();
 
-  //   return () => {
-  //     abortController.abort();
-  //   };
-  // }, []);
+    fetch('http://localhost:3001/stat', {
+      credentials: 'include',
+      signal: abortController.signal,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        // dispatch({ type: 'GET_CANDIDATES', payload: data });
+        setStat(res);
+      })
+      .catch(console.log);
+  }, []);
+
   return (
-    <h3> Stats </h3>
+    <div>
+      <h2> Stat </h2>
+      {stat.map((el) => (
+        <div key={el.id}>
+          <div>
+          Id пользователя: {el.UserId}
+          </div>
+          <div>
+            Счёт пользователя: {el.result}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
-
-export default Stats;
