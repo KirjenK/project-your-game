@@ -1,20 +1,25 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Profile.css';
 
 export default function Profile({ user }) {
   const [stat, setStat] = useState([]);
   const [bestResult, setBestResult] = useState({});
 
+  const dispatch = useDispatch();
+  const { loading } = useSelector((store) => store.globalStore);
+
   useEffect(() => {
     const abortController = new AbortController();
 
-    fetch('http://localhost:3001/profile', {
+    fetch('http://localhost:3001/profile/:id', {
       credentials: 'include',
       signal: abortController.signal,
     })
       .then((res) => res.json())
       .then((res) => {
-        // dispatch({ type: 'GET_CANDIDATES', payload: data });
+        dispatch({ type: 'SET_LOADING', payload: false });
         console.log(res);
         setStat(res.profileStats);
         setBestResult(res.bestResult);
@@ -24,23 +29,25 @@ export default function Profile({ user }) {
 
   const gamesPlayed = stat.length;
 
-  console.log(bestResult);
   return (
-  <div className="main">
+    loading ? (
+      <div className="spinner-container">
+        <img className="spinner" src="https://i.pinimg.com/originals/e2/eb/9e/e2eb9e845ff87fb8fac15f72359efb10.gif" alt="spinner" />
+      </div>
+    )
+      : (
+<div className="main">
     <h2> Профиль </h2>
-    <h3>
-      Всего было сыгрранно
-      {' '}
-      {gamesPlayed}
-    </h3>
-    <h3>
-{' '}
-Лучший результат
-{' '}
-{bestResult.result}
-{' '}
-очков было набрано
-    </h3>
+    {gamesPlayed && (
+<h3>
+      Всего было сыгранно {gamesPlayed}
+</h3>
+    )}
+    {bestResult.result && (
+<h3>
+      Лучший результат {bestResult.result} очков было набрано :з
+</h3>
+    )}
     {stat.map((el) => (
       <div key={el.id} className="secondDiv">
         <div className="User">
@@ -55,6 +62,7 @@ export default function Profile({ user }) {
         </div>
       </div>
     ))}
-  </div>
+</div>
+      )
   );
 }

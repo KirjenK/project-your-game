@@ -1,0 +1,18 @@
+.main {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.secondDiv {
+    display: flex;
+    margin: 15px;
+}
+
+.User {
+    margin-right: 20px;
+}
