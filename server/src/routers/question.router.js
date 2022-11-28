@@ -5,7 +5,8 @@ router.get('/', async (req, res) => {
   try {
     const allThemesData = await Theme.findAll({ include: Question });
     const allThemes = allThemesData.map((el) => el.dataValues);
-    res.json(allThemes);
+    console.log('req/del --- >>> ', req.session?.del);
+    res.json({ allThemes, btnDel: req.session?.del });
   } catch (err) {
     console.log('Error ==>', err);
   }

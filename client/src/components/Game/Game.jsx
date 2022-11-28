@@ -10,7 +10,6 @@ export default function Game() {
   const [pOne, setPOne] = useState('containerTwo');
   const [pTwo, setPTwo] = useState('containerTwo');
   const [answerInput, setAnswerInput] = useState('');
-  const [dis, setDis] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -20,19 +19,20 @@ export default function Game() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setTheme(res);
+        setTheme(res.allThemes);
         setTimeout(() => {
-          const btn = document.querySelectorAll('.btn');
-          console.log('btn --- >>> ', btn);
-          [1, 2, 3].map((el) => btn[el - 1].setAttribute('disabled', 'true'));
-        }, 1000);
+          const btn = document.querySelectorAll('.originalBtn');
+          if (res.btnDel) {
+            res.btnDel.map((el) => btn[el - 1].setAttribute('disabled', 'true'));
+            res.btnDel.map((el) => btn[el - 1].classList.remove('btn'));
+            res.btnDel.map((el) => btn[el - 1].classList.add('disableBtn'));
+          }
+        }, 100);
       });
   }, []);
 
   const onClick = (e) => {
     setMainDiv('containerTwo');
-    // console.log('btn --- >>> ', btn[e.target.id - 1]);
-    // btn[e.target.id - 1].setAttribute('disabled', 'true');
 
     fetch('http://localhost:3001/question', {
       method: 'POST',
@@ -45,12 +45,15 @@ export default function Game() {
       .then((res) => res.json())
       .then((res) => {
         setNewDiv('mainDiv');
-        setQ(res);
+        setQ(res.question);
+        const btn = document.querySelectorAll('.originalBtn');
+        res?.btnDel.map((el) => btn[el - 1].setAttribute('disabled', 'true'));
+        res?.btnDel.map((el) => btn[el - 1].classList.remove('btn'));
+        res?.btnDel.map((el) => btn[el - 1].classList.add('disableBtn'));
       });
   };
 
   const changeInput = (e) => {
-    console.log('e.target.value --- >>> ', e.target.value);
     setAnswerInput(e.target.value);
   };
 
@@ -65,6 +68,8 @@ export default function Game() {
   const goToTable = () => {
     setMainDiv('container');
     setNewDiv('containerTwo');
+    setAnswerInput('');
+    setPTwo('containerTwo');
   };
 
   return (
@@ -76,7 +81,7 @@ export default function Game() {
         <div className="qst">
           {th.Questions.map((qs) => (
           <div key={qs.id}>
-           <button id={qs.id} disabled={dis} className="btn" type="button" onClick={onClick}>{qs.price}</button>
+           <button id={qs.id} className="btn originalBtn" type="button" onClick={onClick}>{qs.price}</button>
           </div>
           ))}
         </div>

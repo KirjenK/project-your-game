@@ -33,7 +33,6 @@
   border: 1px solid rgba(53, 53, 240, 0.7);
   color: #004080;
   font-size: 20px;
-  z-index: -1;
 }
 
 .btn:hover {
@@ -41,7 +40,6 @@
   cursor: pointer;
   transform: scale(1.1);
   transition: 0.7s;
-  z-index: 10;
 }
 
 .currentsStats {
@@ -56,4 +54,13 @@
 
 .showP {
   display: block;
+}
+
+.disableBtn {
+  width: 200px;
+  height: 80px;
+  font-size: 20px;
+  background: rgb(140, 144, 144);
+  border: 1px solid rgba(53, 53, 240, 0.7);
+  color: #004080;
 }
