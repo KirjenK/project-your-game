@@ -4,6 +4,10 @@
   margin-top: 10px;
 }
 
+.containerTwo {
+  display: none;
+}
+
 .card {
   display: flex;
   align-items: center;
@@ -43,4 +47,13 @@
 .currentsStats {
   margin-top: 10px;
   text-align: center;
+}
+
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.showP {
+  display: block;
 }

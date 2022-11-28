@@ -6,7 +6,6 @@ router.get('/', async (req, res) => {
     const allThemesData = await Theme.findAll({ include: Question });
     const allThemes = allThemesData.map((el) => el.dataValues);
     res.json(allThemes);
-    console.log('===>>> 👉👉👉 file: question.router.js 👉👉👉 line 7 👉👉👉 allThemes', allThemes);
   } catch (err) {
     console.log('Error ==>', err);
   }
