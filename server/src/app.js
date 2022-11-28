@@ -15,8 +15,9 @@ const sessions = require('./middlewares/sessions');
 const cors = require('./middlewares/cors');
 const dbCheck = require('../db/dbCheck');
 
-const profileStat = require('./routes/profileStatRoute');
-const stat = require('./routes/staticksRoute');
+const profileStat = require('./routers/profileStatRoute');
+const stat = require('./routers/staticksRoute');
+const questionRouter = require('./routers/question.router');
 
 // Проверяем подключение к БД!
 dbCheck();
@@ -27,12 +28,11 @@ app.use(sessions);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use('/signin', authRouter);
 app.use('/signup', regRouter);
 app.use('/profile', profileStat);
 app.use('/stat', stat);
-
+app.use('/game', questionRouter);
 
 app.listen(PORT, (err) => {
   if (err) return console.log('Ошибка запуска сервера.', err.message);
