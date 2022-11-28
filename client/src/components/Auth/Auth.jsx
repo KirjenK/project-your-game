@@ -43,17 +43,17 @@ export default function Auth({ setUser }) {
   return (
     <div className="authForm">
       <form className={formName} onSubmit={handleSubmit}>
-      <div>
-      <label>Email address</label>
-      <input type="email" value={form.email} name="email" onChange={handleInput} />
+      <div className="inputForm">
+      <label className="labelForm">E-mail address</label>
+      <input type="email" value={form.email} name="email" onChange={handleInput} placeholder="enter e-mail ..." required />
       </div>
-      <div>
-      <label>Password</label>
-      <input type="password" value={form.password} name="password" onChange={handleInput} />
+      <div className="inputForm">
+      <label className="labelForm">Password</label>
+      <input type="password" value={form.password} name="password" placeholder="enter password ..." onChange={handleInput} required />
       </div>
-      <button type="submit">Submit</button>
+      <button className="authBtn" type="submit">Submit</button>
       </form>
-      <div>
+      <div className="anserAuth">
         {answer}
       </div>
     </div>

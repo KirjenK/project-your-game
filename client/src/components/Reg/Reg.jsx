@@ -58,26 +58,26 @@ export default function Auth({ setUser }) {
   return (
     <div className="authForm">
       <form className={formName} onSubmit={handleSubmit}>
-      <div>
-      <label>Name</label>
-      <input type="text" value={form.name} name="name" onChange={handleInput} />
+      <div className="inputForm">
+      <label className="labelForm">Name</label>
+      <input type="text" value={form.name} name="name" placeholder="enter name ..." onChange={handleInput} />
       </div>
-      <div>
-      <label>Email address</label>
-      <input type="email" value={form.email} name="email" onChange={handleInput} />
+      <div className="inputForm">
+      <label className="labelForm">E-mail address</label>
+      <input type="email" value={form.email} name="email" placeholder="enter e-mail ..." onChange={handleInput} />
       </div>
-      <div>
-      <label>Password</label>
-      <input type="password" value={form.password} name="password" onChange={handleInput} />
+      <div className="inputForm">
+      <label className="labelForm">Password</label>
+      <input type="password" value={form.password} name="password" placeholder="enter password ..." onChange={handleInput} />
       </div>
-      <div>
-      <label>Repeat password</label>
-      <input type="password" value={form.repeatPassword} name="repeatPassword" onChange={handleInput} />
+      <div className="inputForm">
+      <label className="labelForm">Repeat password</label>
+      <input type="password" value={form.repeatPassword} placeholder="repeat password ..." name="repeatPassword" onChange={handleInput} />
       </div>
 
-      <button type="submit">Submit</button>
+      <button className="authBtn" type="submit">Submit</button>
       </form>
-      <div>
+      <div className="anserAuth">
         {answer}
       </div>
     </div>
