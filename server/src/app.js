@@ -18,6 +18,8 @@ dbCheck();
 app.use(morgan('dev'));
 app.use(cors);
 app.use(sessions);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.listen(PORT, (err) => {
   if (err) return console.log('Ошибка запуска сервера.', err.message);
