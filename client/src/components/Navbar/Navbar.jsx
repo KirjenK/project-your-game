@@ -9,7 +9,7 @@ export default function Navbar({ user, setUser }) {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res.status === 200) { setUser(null); }
+        if (res.status === 'success') { setUser(null); }
       });
   };
 
