@@ -4,6 +4,8 @@ import Navbar from './components/Navbar/Navbar';
 import Game from './components/Game/Game';
 import Auth from './components/Auth/Auth';
 import Reg from './components/Reg/Reg';
+import Stats from './components/Stats/Stats';
+import Profile from './components/Profile/Profile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,10 +32,10 @@ function App() {
       <Routes>
 
         <Route path="/game" element={<Game user={user} setUser={setUser} />} />
-        {/* <Route path="/reg" />
-        <Route path="/auth" />
-        <Route path="/profile" />
-        <Route path="/stats" /> */}
+        <Route path="/reg" element={<Reg user={user} setUser={setUser} />} />
+        <Route path="/auth" element={<Auth user={user} setUser={setUser} />} />
+        <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
+        <Route path="/stats" element={<Stats user={user} setUser={setUser} />} />
 
       </Routes>
     </>

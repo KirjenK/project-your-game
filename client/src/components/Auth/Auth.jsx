@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './auth.css';
 
-export default function Auth() {
-  const [user, setUser] = useState(null);
-
+export default function Auth({ setUser }) {
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -26,7 +24,6 @@ export default function Auth() {
       .then((res) => res.json())
       .then((res) => setUser(res));
   };
-  console.log(user);
 
   return (
     <div className="authForm">
