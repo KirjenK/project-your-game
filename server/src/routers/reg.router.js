@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     const findUser = await User.findOne({ where: { name } });
     if (password !== repeatPassword) {
       res.json({ status: 404, message: 'пароли не совпадают' });
-    } else if (!name.trim() || !password.trim() || !repeatPassword.trim()) {
+    } else if (!name?.trim() || !password?.trim() || !repeatPassword?.trim()) {
       res.json({ status: 'error', message: 'Пожалуйста заполните все поля' });
     } else if (findUser?.name === name) {
       res.json({ status: 404, message: 'пользователь уже существует' });
