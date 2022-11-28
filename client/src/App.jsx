@@ -1,13 +1,42 @@
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Navbar from './components/Navbar/Navbar';
+import Game from './components/Game/Game';
 import Auth from './components/Auth/Auth';
 import Reg from './components/Reg/Reg';
 
 function App() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    fetch('http://localhost:3001', {
+      credentials: 'include',
+      signal: abortController.signal,
+    })
+      .then((res) => res.json)
+      .then((res) => {
+        console.log(res);
+        setUser(res.user);
+      });
+
+    return () => {
+      abortController.abort();
+    };
+  }, []);
   return (
-    <div className="App">
-      {/* <Auth /> */}
-      <Reg />
-    </div>
+    <>
+      <Navbar setUser={setUser} />
+      <Routes>
+
+        <Route path="/game" element={<Game user={user} setUser={setUser} />} />
+        {/* <Route path="/reg" />
+        <Route path="/auth" />
+        <Route path="/profile" />
+        <Route path="/stats" /> */}
+
+      </Routes>
+    </>
   );
 }
 
