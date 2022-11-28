@@ -3,8 +3,8 @@ const { Game } = require('../../db/models');
 
 router.get('/', async (req, res) => {
   try {
-    const profileStats = await Game.findAll({ order: [['result', 'DESC']] });
-    res.json(profileStats);
+    const stats = await Game.findAll({ order: [['result', 'DESC']] });
+    res.json(stats);
   } catch (err) {
     console.log('Error ==>', err);
   }
