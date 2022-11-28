@@ -1,8 +1,9 @@
-
 import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Game from './components/Game/Game';
+import Auth from './components/Auth/Auth';
+import Reg from './components/Reg/Reg';
 
 function App() {
   const [user, setUser] = useState(null);
