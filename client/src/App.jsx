@@ -6,6 +6,7 @@ import Auth from './components/Auth/Auth';
 import Reg from './components/Reg/Reg';
 import Stats from './components/Stats/Stats';
 import Profile from './components/Profile/Profile';
+import ProtectedRouter from './components/ProtectedRouter/ProtectedRouter';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,16 +29,19 @@ function App() {
   }, []);
   return (
     <>
-      <Navbar setUser={setUser} />
-      <Routes>
+      <Navbar user={user} setUser={setUser} />
+  <Routes>
 
+      <Route element={<ProtectedRouter user={user} />}>
         <Route path="/game" element={<Game user={user} setUser={setUser} />} />
-        <Route path="/reg" element={<Reg user={user} setUser={setUser} />} />
-        <Route path="/auth" element={<Auth user={user} setUser={setUser} />} />
         <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
         <Route path="/stats" element={<Stats user={user} setUser={setUser} />} />
+      </Route>
 
-      </Routes>
+        <Route path="/reg" element={<Reg user={user} setUser={setUser} />} />
+        <Route path="/auth" element={<Auth user={user} setUser={setUser} />} />
+
+  </Routes>
     </>
   );
 }

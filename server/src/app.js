@@ -6,6 +6,7 @@ const morgan = require('morgan');
 
 const authRouter = require('./routers/auth.router');
 const regRouter = require('./routers/reg.router');
+const logoutRouter = require('./routers/logout.router');
 
 const app = express();
 
@@ -19,7 +20,6 @@ const profileStat = require('./routers/profileStatRoute');
 const stat = require('./routers/staticksRoute');
 
 const questionRouter = require('./routers/question.router');
-
 
 // Проверяем подключение к БД!
 dbCheck();
@@ -35,7 +35,7 @@ app.use('/signup', regRouter);
 app.use('/profile', profileStat);
 app.use('/stat', stat);
 app.use('/game', questionRouter);
-
+app.use('/logout', logoutRouter);
 
 app.listen(PORT, (err) => {
   if (err) return console.log('Ошибка запуска сервера.', err.message);

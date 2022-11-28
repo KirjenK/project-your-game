@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Navbar({ setUser }) {
+export default function Navbar({ user, setUser }) {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     fetch('http://localhost:3001/logout', {
       credentials: 'include',
@@ -9,18 +11,31 @@ export default function Navbar({ setUser }) {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res.status === 200) { setUser(null); }
+        if (res.status === 'success') { setUser(null); }
+        navigate('/');
       });
   };
 
-  return (
+  const notAuthNav = () => (
     <>
-      <Link style={{ margin: '10px' }} to="/game">Game</Link>
       <Link style={{ margin: '10px' }} to="/reg">Registration</Link>
       <Link style={{ margin: '10px' }} to="/auth">Authorization</Link>
-      <Link style={{ margin: '10px' }} to="/profile">Profile</Link>
-      <Link style={{ margin: '10px' }} to="/stats">Top stats</Link>
-      <button onClick={handleLogout} type="button">Logout</button>
     </>
+  );
+
+  const authNav = () => (
+    <>
+    <Link style={{ margin: '10px' }} to="/game">Game</Link>
+    <Link style={{ margin: '10px' }} to="/profile">Profile</Link>
+    <Link style={{ margin: '10px' }} to="/stats">Top stats</Link>
+    <button onClick={handleLogout} type="button">Logout</button>
+    </>
+
+  );
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {user ? authNav() : notAuthNav()}
+    </div>
   );
 }
