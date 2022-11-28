@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const authRouter = require('./routers/auth.router');
 const regRouter = require('./routers/reg.router');
 const logoutRouter = require('./routers/logout.router');
+const userRouter = require('./routers/user.router');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(sessions);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/', userRouter);
 app.use('/signin', authRouter);
 app.use('/signup', regRouter);
 app.use('/profile', profileStat);
