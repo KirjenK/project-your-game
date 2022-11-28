@@ -16,10 +16,10 @@ export default function Navbar({ setUser }) {
   return (
     <>
       <Link style={{ margin: '10px' }} to="/game">Game</Link>
-      {/* <Link style={{ margin: '10px' }} to="/reg">Registration</Link>
+      <Link style={{ margin: '10px' }} to="/reg">Registration</Link>
       <Link style={{ margin: '10px' }} to="/auth">Authorization</Link>
       <Link style={{ margin: '10px' }} to="/profile">Profile</Link>
-      <Link style={{ margin: '10px' }} to="/stats">Top stats</Link> */}
+      <Link style={{ margin: '10px' }} to="/stats">Top stats</Link>
       <button onClick={handleLogout} type="button">Logout</button>
     </>
   );
