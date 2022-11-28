@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar({ user, setUser }) {
+  console.log('===>>> 👉👉👉 file: Navbar.jsx 👉👉👉 line 5 👉👉👉 user', user);
   const navigate = useNavigate();
 
   const handleLogout = () => {

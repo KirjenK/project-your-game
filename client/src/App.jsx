@@ -10,6 +10,7 @@ import ProtectedRouter from './components/ProtectedRouter/ProtectedRouter';
 
 function App() {
   const [user, setUser] = useState(null);
+  console.log('===>>> 👉👉👉 file: App.jsx 👉👉👉 line 13 👉👉👉 user', user);
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -17,10 +18,10 @@ function App() {
       credentials: 'include',
       signal: abortController.signal,
     })
-      .then((res) => res.json)
+      .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        setUser(res.user);
+        console.log('res=>>>>>>>>useffect', res);
+        setUser(res);
       });
 
     return () => {
@@ -38,8 +39,10 @@ function App() {
         <Route path="/stats" element={<Stats user={user} setUser={setUser} />} />
       </Route>
 
+      <Route element={<ProtectedRouter user={!user} />}>
         <Route path="/reg" element={<Reg user={user} setUser={setUser} />} />
         <Route path="/auth" element={<Auth user={user} setUser={setUser} />} />
+      </Route>
 
   </Routes>
     </>
