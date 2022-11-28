@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Question', [
+    await queryInterface.bulkInsert('Questions', [
       // Тема номер 1
       {
         title: 'Какое словосочетание является названием знаменитого танго Хосе М. Люкьеси?', price: 200, answer: 'Брызги шампанского', ThemeId: 1, createdAt: new Date(), updatedAt: new Date(),
@@ -69,24 +69,24 @@ module.exports = {
       },
       // Тема 5
       {
-        title: 'Кто является режиссером фильма «Челюсти»?', price: 200, answer: 'Стивен Спилберг', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
+        title: 'Самолетная деталь в автомобиле, это?', price: 200, answer: 'Крыло', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
       },
       {
-        title: 'Кто сыграл главную роль в новом Бетмане?', price: 400, answer: 'Роберт Паттинсон', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
+        title: 'Как называется автомобиль у которого оба моста ведущие?', price: 400, answer: 'Полноприводный', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
       },
       {
-        title: 'Какой актер сыграл главные роли в фильмах «Догма», «Сорвиголова», «Чужой билет»?', price: 600, answer: 'Бен Аффлек', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
+        title: 'Название какого автомобильного концерна ранее красовалось на Эйфелевой башне?', price: 600, answer: 'Ситроен', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
       },
       {
-        title: 'В скольких номинациях получил «Оскара» фильм «Титаник»?', price: 800, answer: '11', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
+        title: 'На сколько километров в режиме форсажа слышны выхлопные газы автомобиля Aston Martin Vantage?', price: 800, answer: '6', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
       },
       {
-        title: 'В какой первой роли снялся Ван Дамм?', price: 1000, answer: 'Роль Ивана из России', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
+        title: 'Рекорд скорости достигнутый на атомобиле(округленный до 100 в меньшую сторону)', price: 1000, answer: '1200', ThemeId: 5, createdAt: new Date(), updatedAt: new Date(),
       },
     ], {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Question', null, {});
+    await queryInterface.bulkDelete('Questions', null, {});
   },
 };
