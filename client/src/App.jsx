@@ -28,7 +28,7 @@ function App() {
   }, []);
   return (
     <>
-      <Navbar setUser={setUser} />
+      <Navbar user={user} setUser={setUser} />
       <Routes>
 
         <Route path="/game" element={<Game user={user} setUser={setUser} />} />
