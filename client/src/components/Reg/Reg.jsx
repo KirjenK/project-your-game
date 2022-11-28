@@ -30,6 +30,7 @@ export default function Auth({ setUser }) {
       .then((res) => {
         if (res.message === 'пароли не совпадают') {
           setForm({
+            ...form,
             password: '',
             repeatPassword: '',
           });
@@ -38,11 +39,13 @@ export default function Auth({ setUser }) {
           setAnswer(res.message);
         } else if (res.message === 'пользователь уже существует') {
           setForm({
+            ...form,
             name: '',
           });
           setAnswer(res.message);
         } else if (res.message === 'пароль должен быть больше трех символов') {
           setForm({
+            ...form,
             password: '',
             repeatPassword: '',
           });
