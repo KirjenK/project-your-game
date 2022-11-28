@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar({ user, setUser }) {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     fetch('http://localhost:3001/logout', {
       credentials: 'include',
@@ -10,6 +12,7 @@ export default function Navbar({ user, setUser }) {
       .then((res) => {
         console.log(res);
         if (res.status === 'success') { setUser(null); }
+        navigate('/');
       });
   };
 
