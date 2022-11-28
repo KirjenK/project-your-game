@@ -1,8 +1,11 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Stats() {
   const [stat, setStat] = useState([]);
+  const dispatch = useDispatch();
+  const { loading } = useSelector((store) => store.globalStore);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -13,25 +16,32 @@ export default function Stats() {
     })
       .then((res) => res.json())
       .then((res) => {
-        // dispatch({ type: 'GET_CANDIDATES', payload: data });
+        dispatch({ type: 'SET_LOADING', payload: false });
         setStat(res);
       })
       .catch(console.log);
   }, []);
 
   return (
-    <div>
+    loading ? (
+      <div className="spinner-container">
+        <img className="spinner" src="https://i.pinimg.com/originals/e2/eb/9e/e2eb9e845ff87fb8fac15f72359efb10.gif" alt="spinner" />
+      </div>
+    )
+      : (
+<div className="main">
       <h2> Stat </h2>
       {stat.map((el) => (
-        <div key={el.id}>
-          <div>
+        <div key={el.id} className="secondDiv">
+          <div className="User">
           Id пользователя: {el.UserId}
           </div>
-          <div>
+          <div className="Result">
             Счёт пользователя: {el.result}
           </div>
         </div>
       ))}
-    </div>
+</div>
+      )
   );
 }

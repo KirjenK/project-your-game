@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Game } = require('../../db/models');
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     // const UserId = req.session.userId;
     const profileStats = await Game.findAll({ where: { UserId: 1 }, order: [['result', 'DESC']] });
