@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Profile() {
+export default function Profile({ user }) {
+    const [games, setGames] = useState([]);
+
   return (
     
   );
 }
-
-export default Profile;
