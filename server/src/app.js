@@ -12,6 +12,8 @@ const questionRouter = require('./routers/question.router');
 const profileStat = require('./routers/profileStatRoute');
 const stat = require('./routers/staticksRoute');
 const answerRouter = require('./routers/answer.router');
+const gameResultRouter = require('./routers/gameResult.router');
+const addResultToBaseRouter = require('./routers/addResultToBase');
 
 const app = express();
 
@@ -38,6 +40,8 @@ app.use('/stat', stat);
 app.use('/game', questionRouter);
 app.use('/logout', logoutRouter);
 app.use('/question', answerRouter);
+app.use('/result', gameResultRouter);
+app.use('/addResultToBase', addResultToBaseRouter);
 
 app.listen(PORT, (err) => {
   if (err) return console.log('Ошибка запуска сервера.', err.message);
