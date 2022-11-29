@@ -13,6 +13,7 @@ export default function Game() {
   const [timer, setTimer] = useState(30);
   const [result, setResult] = useState([]);
   const [btns, setBtns] = useState([]);
+  const [chiter, setChiter] = useState('chiter');
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -64,7 +65,6 @@ export default function Game() {
       clearTimeout(timeOut);
     };
   }, [timer]);
-
   const onClick = (e) => {
     setMainDiv('containerTwo');
     setTimer(30);
@@ -95,7 +95,8 @@ export default function Game() {
   };
 
   const showAnswer = () => {
-    if (q?.answer === answerInput) {
+    if (q?.answer.toLowerCase().trim() === answerInput.toLowerCase().trim()) {
+      setChiter('containerTwo');
       setPOne('showP');
       setTimer(null);
       const titleEl = document?.querySelector('.qTitle');
@@ -112,8 +113,9 @@ export default function Game() {
         .then((res) => {
           setResult(res.currentResult);
         });
-    } else if (q?.answer !== answerInput) {
+    } else if (q?.answer.toLowerCase().trim() !== answerInput.toLowerCase().trim()) {
       setPTwo('showP');
+      setChiter('containerTwo');
       setTimer(null);
       const titleEl = document?.querySelector('.qTitle');
       const title = titleEl.textContent;
@@ -138,6 +140,7 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
+    setChiter('chiter');
 
     if (result.length === 25) {
       const curResult = result.reduce((acc, el) => acc + el, 0);
@@ -196,8 +199,8 @@ export default function Game() {
     </div>
     <div className={newDiv}>
       <div id={q?.price} className="qTitle">{q?.title}</div>
-      <input type="text" name="answer" value={answerInput} onChange={changeInput} />
-      <button type="button" onClick={showAnswer}>Submit</button>
+      <input placeholder="Введите ответ..." type="text" className="qTitle input" name="answer" value={answerInput} onChange={changeInput} />
+      <button type="button" className={`qTitle ${chiter}`} onClick={showAnswer}>Submit</button>
       <p className={pOne}>Ответ верный !</p>
       <button type="button" className={pOne} onClick={goToTable}>Вернуться к таблице</button>
       <p className={pTwo}>
@@ -205,10 +208,14 @@ export default function Game() {
               Правильный ответ: {q?.answer}
       </p>
       <button type="button" className={pTwo} onClick={goToTable}>Вернуться к таблице</button>
-      <p>{timer}</p>
+      {timer ? (
+        <p>Осталось времени: {timer} сек</p>
+      ) : (
+        null
+      )}
     </div>
     <div className="currentsStats">
-          <button onClick={endGame} type="button">Закончить игру</button>
+          <button className="qTitle" onClick={endGame} type="button">Закончить игру</button>
          <h3> Текущая статистика: {result?.reduce((acc, el) => acc + el, 0)}</h3>
     </div>
     </>
