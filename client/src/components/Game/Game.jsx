@@ -10,7 +10,9 @@ export default function Game() {
   const [pOne, setPOne] = useState('containerTwo');
   const [pTwo, setPTwo] = useState('containerTwo');
   const [answerInput, setAnswerInput] = useState('');
+  const [timer, setTimer] = useState(30);
   const [result, setResult] = useState([]);
+
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -32,6 +34,24 @@ export default function Game() {
         }, 100);
       });
   }, []);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        setMainDiv('container');
+        setNewDiv('containerTwo');
+        setAnswerInput('');
+        setPTwo('containerTwo');
+        setPOne('containerTwo');
+        setTimer(30);
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [timer]);
 
   const onClick = (e) => {
     setMainDiv('containerTwo');
@@ -105,6 +125,8 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
+    setTimer(30);
+    
     if (result.length === 25) {
       const curResult = result.reduce((acc, el) => acc + el, 0);
       fetch('http://localhost:3001/addResultToBase', {
@@ -145,7 +167,7 @@ export default function Game() {
               Правильный ответ: {q?.answer}
       </p>
       <button type="button" className={pTwo} onClick={goToTable}>Вернуться к таблице</button>
-
+      <p>{timer}</p>
     </div>
     <div className="currentsStats">
          <h3> Current stats: {result?.reduce((acc, el) => acc + el, 0)}</h3>
