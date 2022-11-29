@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Profile.css';
@@ -13,7 +12,7 @@ export default function Profile({ user }) {
   useEffect(() => {
     const abortController = new AbortController();
 
-    fetch('http://localhost:3001/profile/:id', {
+    fetch('http://localhost:3001/profile/', {
       credentials: 'include',
       signal: abortController.signal,
     })
@@ -21,13 +20,19 @@ export default function Profile({ user }) {
       .then((res) => {
         dispatch({ type: 'SET_LOADING', payload: false });
         console.log(res);
-        setStat(res.profileStats);
-        setBestResult(res.bestResult);
+        if (res.message === 'Игр нету') {
+          return null;
+        }
+        setStat(res?.profileStats);
+        setBestResult(res?.bestResult);
       })
       .catch(console.log);
   }, []);
 
-  const gamesPlayed = stat.length;
+  const gamesPlayed = stat?.length;
+
+  console.log(bestResult);
+  console.log(stat);
 
   return (
     loading ? (
@@ -43,12 +48,12 @@ export default function Profile({ user }) {
       Всего было сыгранно {gamesPlayed}
 </h3>
     )}
-    {bestResult.result && (
+    {bestResult?.result && (
 <h3>
       Лучший результат {bestResult.result} очков было набрано :з
 </h3>
     )}
-    {stat.map((el) => (
+    {stat?.map((el) => (
       <div key={el.id} className="secondDiv">
         <div className="User">
           Id игры:
