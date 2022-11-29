@@ -1,0 +1,31 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin: 50px;
+    margin-top: 70px;
+    padding: 50px;
+    border: 4px solid rgba(40, 42, 185, 0.884);
+    border-radius: 30px;
+}
+
+.secondDiv {
+    display: flex;
+    margin: 20px;
+    padding: 15px;
+    border: 2px solid rgba(40, 42, 185, 0.884);
+    border-radius: 15px;
+    box-shadow: 3px 3px 10px 3px rgba(12, 33, 221, 0.712);
+}
+
+.Name {
+    margin-left: 25px;
+}
+
+.Result {
+    margin-left: 25px;
+}

@@ -1,0 +1,11 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": "> 5%"
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}
