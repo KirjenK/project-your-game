@@ -105,6 +105,17 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
+    if (result.length === 25) {
+      const curResult = result.reduce((acc, el) => acc + el, 0);
+      fetch('http://localhost:3001/addResultToBase', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ curResult }),
+      });
+    }
   };
 
   return (
@@ -137,7 +148,7 @@ export default function Game() {
 
     </div>
     <div className="currentsStats">
-         <h3> Current stats: {result.reduce((acc, el) => acc + el, 0)}</h3>
+         <h3> Current stats: {result?.reduce((acc, el) => acc + el, 0)}</h3>
     </div>
     </>
   );
