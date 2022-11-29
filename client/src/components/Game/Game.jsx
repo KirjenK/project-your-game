@@ -103,7 +103,7 @@ export default function Game() {
 
     </div>
     <div className="currentsStats">
-         <h3> Current stats:</h3>
+         <h3> Текущая статистика:</h3>
     </div>
     </>
   );
