@@ -11,28 +11,30 @@
 .card {
   display: flex;
   align-items: center;
-  background: teal;
+  background: rgb(6, 14, 111);
   max-width: 100vw;
   justify-content: center;
 }
 
 .qst {
   display: flex;
+  margin-left: 70px;
 }
 
 .themeTitle {
-  min-width: 195px;
-  font-size: 18px;
+  min-width: 250px;
+  font-size: 25px;
   font-style: italic;
+  color :#c9d823;
 }
 
 .btn {
   width: 200px;
   height: 80px;
-  background: teal;
+  background: rgb(6, 14, 111);
   border: 1px solid rgba(53, 53, 240, 0.7);
-  color: #004080;
-  font-size: 20px;
+  color: #c9d823;
+  font-size: 30px;
 }
 
 .btn:hover {
@@ -50,6 +52,9 @@
 .mainDiv {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 .showP {
@@ -63,4 +68,13 @@
   background: rgb(140, 144, 144);
   border: 1px solid rgba(53, 53, 240, 0.7);
   color: #004080;
+}
+
+.qTitle {
+  margin-bottom: 10px;
+}
+
+.input {
+  min-width: 300px;
+  min-height: 20px;
 }
