@@ -8,11 +8,9 @@ router.post('/', async (req, res) => {
       if (!req.session.result) {
         req.session.result = [-(price)];
         res.json({ currentResult: req.session.result });
-        console.log('req.session.result === >>> ', req.session.result);
       } else {
         req.session.result.push(-(price));
         res.json({ currentResult: req.session.result });
-        console.log('req.session.result === >>> ', req.session.result);
       }
     } else {
       const currentQuestData = await Question.findOne({ where: { title } });
