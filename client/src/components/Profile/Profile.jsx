@@ -41,7 +41,7 @@ export default function Profile({ user }) {
       </div>
     )
       : (
-<div className="main">
+<div className="mainDiv">
     <h2> Профиль </h2>
     {gamesPlayed && (
 <h3>
@@ -59,8 +59,8 @@ export default function Profile({ user }) {
       </>
     )}
     {stat && stat?.map((el) => (
-      <div key={el.id} className="secondDiv">
-        <div className="User">
+      <div key={el.id} className="secondDivProf">
+        <div className="UserProf">
           Когда была сыгранна игра :
           {' '}
           {new Date(Date.parse(el.createdAt)).toLocaleTimeString()}
