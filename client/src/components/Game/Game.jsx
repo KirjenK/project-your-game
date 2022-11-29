@@ -10,6 +10,7 @@ export default function Game() {
   const [pOne, setPOne] = useState('containerTwo');
   const [pTwo, setPTwo] = useState('containerTwo');
   const [answerInput, setAnswerInput] = useState('');
+  const [timer, setTimer] = useState(30);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -30,6 +31,24 @@ export default function Game() {
         }, 100);
       });
   }, []);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        setMainDiv('container');
+        setNewDiv('containerTwo');
+        setAnswerInput('');
+        setPTwo('containerTwo');
+        setPOne('containerTwo');
+        setTimer(30);
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [timer]);
 
   const onClick = (e) => {
     setMainDiv('containerTwo');
@@ -71,6 +90,7 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
+    setTimer(30);
   };
 
   return (
@@ -100,7 +120,7 @@ export default function Game() {
               Правильный ответ: {q?.answer}
       </p>
       <button type="button" className={pTwo} onClick={goToTable}>Вернуться к таблице</button>
-
+      <p>{timer}</p>
     </div>
     <div className="currentsStats">
          <h3> Current stats:</h3>
