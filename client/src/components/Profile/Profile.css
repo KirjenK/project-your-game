@@ -11,6 +11,7 @@
 .secondDiv {
     display: flex;
     margin: 15px;
+    padding: 5px;
 }
 
 .User {

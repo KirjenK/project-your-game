@@ -31,9 +31,6 @@ export default function Profile({ user }) {
 
   const gamesPlayed = stat?.length;
 
-  console.log(bestResult);
-  console.log(stat);
-
   return (
     loading ? (
       <div className="spinner-container">
@@ -56,9 +53,11 @@ export default function Profile({ user }) {
     {stat?.map((el) => (
       <div key={el.id} className="secondDiv">
         <div className="User">
-          Id игры:
+          Когда была сыгранна игра :
           {' '}
-          {el.id}
+          {new Date(Date.parse(el.createdAt)).toLocaleTimeString()}
+          {' '}
+          {new Date(Date.parse(el.createdAt)).toLocaleDateString()}
         </div>
         <div className="Result">
           Счёт пользователя:

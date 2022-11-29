@@ -11,8 +11,13 @@
 .secondDiv {
     display: flex;
     margin: 15px;
+    padding: 5px;
 }
 
-.User {
-    margin-right: 20px;
+.Name {
+    margin-left: 15px;
+}
+
+.Result {
+    margin-left: 15px;
 }
