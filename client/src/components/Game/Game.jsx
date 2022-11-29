@@ -12,6 +12,7 @@ export default function Game() {
   const [answerInput, setAnswerInput] = useState('');
   const [timer, setTimer] = useState(30);
   const [result, setResult] = useState([]);
+  const [btns, setBtns] = useState([]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -137,7 +138,6 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
-    setTimer(30);
 
     if (result.length === 25) {
       const curResult = result.reduce((acc, el) => acc + el, 0);

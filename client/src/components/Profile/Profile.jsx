@@ -30,7 +30,10 @@ export default function Profile({ user }) {
   }, []);
 
   const gamesPlayed = stat?.length;
-
+  console.log('===>>> 👉👉👉 file: Profile.jsx 👉👉👉 line 33 👉👉👉 stat', stat);
+  // if (stat?.length) { stat.length = 10; } else {
+  //   stat.length = 0;
+  // }
   return (
     loading ? (
       <div className="spinner-container">
@@ -46,11 +49,16 @@ export default function Profile({ user }) {
 </h3>
     )}
     {bestResult?.result && (
-<h3>
+      <>
+    <h3>
       Лучший результат {bestResult.result} очков было набрано :з
-</h3>
+    </h3>
+    <h2>
+  Топ 10 игр
+    </h2>
+      </>
     )}
-    {stat?.map((el) => (
+    {stat && stat?.map((el) => (
       <div key={el.id} className="secondDiv">
         <div className="User">
           Когда была сыгранна игра :

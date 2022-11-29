@@ -22,7 +22,7 @@ export default function Stats() {
       })
       .catch(console.log);
   }, []);
-
+  stat.length = 10;
   return (
     loading ? (
       <div className="spinner-container">
@@ -31,7 +31,8 @@ export default function Stats() {
     )
       : (
 <div className="main">
-      <h2> Статистика </h2>
+      <h3> Статистика </h3>
+      <h2>Топ 10 игр</h2>
       {stat.map((el) => (
         <div key={el.id} className="secondDiv">
           <div className="Email">
