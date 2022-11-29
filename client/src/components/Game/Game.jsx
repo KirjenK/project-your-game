@@ -10,6 +10,7 @@ export default function Game() {
   const [pOne, setPOne] = useState('containerTwo');
   const [pTwo, setPTwo] = useState('containerTwo');
   const [answerInput, setAnswerInput] = useState('');
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -19,6 +20,7 @@ export default function Game() {
     })
       .then((res) => res.json())
       .then((res) => {
+        setResult(res.currentResult);
         setTheme(res.allThemes);
         setTimeout(() => {
           const btn = document.querySelectorAll('.originalBtn');
@@ -33,6 +35,8 @@ export default function Game() {
 
   const onClick = (e) => {
     setMainDiv('containerTwo');
+
+    // e.target.textContent - Сколько стоит вопрос
 
     fetch('http://localhost:3001/question', {
       method: 'POST',
@@ -60,8 +64,38 @@ export default function Game() {
   const showAnswer = () => {
     if (q?.answer === answerInput) {
       setPOne('showP');
+      const titleEl = document?.querySelector('.qTitle');
+      const title = titleEl.textContent;
+      fetch('http://localhost:3001/result', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, answer: true }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log('===>>> 👉👉👉 file: Game.jsx 👉👉👉 line 78 👉👉👉 res', res);
+          setResult(res.currentResult);
+        });
     } else {
       setPTwo('showP');
+      const titleEl = document?.querySelector('.qTitle');
+      const title = titleEl.textContent;
+      fetch('http://localhost:3001/result', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, answer: false }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log('===>>> 👉👉👉 file: Game.jsx 👉👉👉 line 95 👉👉👉 res', res);
+          setResult(res.currentResult);
+        });
     }
   };
 
@@ -71,6 +105,17 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
+    if (result.length === 25) {
+      const curResult = result.reduce((acc, el) => acc + el, 0);
+      fetch('http://localhost:3001/addResultToBase', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ curResult }),
+      });
+    }
   };
 
   return (
@@ -90,7 +135,7 @@ export default function Game() {
       ))}
     </div>
     <div className={newDiv}>
-      <div>{q?.title}</div>
+      <div className="qTitle">{q?.title}</div>
       <input type="text" name="answer" value={answerInput} onChange={changeInput} />
       <button type="button" onClick={showAnswer}>Submit</button>
       <p className={pOne}>Ответ верный !</p>
@@ -103,7 +148,7 @@ export default function Game() {
 
     </div>
     <div className="currentsStats">
-         <h3> Current stats:</h3>
+         <h3> Current stats: {result?.reduce((acc, el) => acc + el, 0)}</h3>
     </div>
     </>
   );
