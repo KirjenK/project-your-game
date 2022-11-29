@@ -18,7 +18,6 @@ export default function Stats() {
       .then((res) => res.json())
       .then((res) => {
         dispatch({ type: 'SET_LOADING', payload: false });
-        console.log(res);
         setStat(res);
       })
       .catch(console.log);

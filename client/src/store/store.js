@@ -9,5 +9,3 @@ const reducer = combineReducers({
 });
 
 export const store = configureStore({ reducer });
-
-store.subscribe(() => console.log(store.getState()));
