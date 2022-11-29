@@ -45,11 +45,11 @@ export default function Auth({ setUser }) {
       <form className={formName} onSubmit={handleSubmit}>
       <div className="inputForm">
       <label className="labelForm">E-mail address</label>
-      <input type="email" value={form.email} name="email" onChange={handleInput} placeholder="enter e-mail ..." required />
+      <input type="email" value={form.email} name="email" onChange={handleInput} placeholder="enter e-mail ..." required autoComplete="on" />
       </div>
       <div className="inputForm">
       <label className="labelForm">Password</label>
-      <input type="password" value={form.password} name="password" placeholder="enter password ..." onChange={handleInput} required />
+      <input type="password" value={form.password} name="password" placeholder="enter password ..." onChange={handleInput} required autoComplete="on" />
       </div>
       <button className="authBtn" type="submit">Submit</button>
       </form>

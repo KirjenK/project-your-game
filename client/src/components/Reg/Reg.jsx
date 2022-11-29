@@ -63,19 +63,19 @@ export default function Auth({ setUser }) {
       <form className={formName} onSubmit={handleSubmit}>
       <div className="inputForm">
       <label className="labelForm">Name</label>
-      <input type="text" value={form.name} name="name" placeholder="enter name ..." onChange={handleInput} />
+      <input type="text" value={form.name} name="name" placeholder="enter name ..." onChange={handleInput} autoComplete="on" required />
       </div>
       <div className="inputForm">
       <label className="labelForm">E-mail address</label>
-      <input type="email" value={form.email} name="email" placeholder="enter e-mail ..." onChange={handleInput} />
+      <input type="email" value={form.email} name="email" placeholder="enter e-mail ..." onChange={handleInput} autoComplete="on" required />
       </div>
       <div className="inputForm">
       <label className="labelForm">Password</label>
-      <input type="password" value={form.password} name="password" placeholder="enter password ..." onChange={handleInput} />
+      <input type="password" value={form.password} name="password" placeholder="enter password ..." onChange={handleInput} autoComplete="on" required />
       </div>
       <div className="inputForm">
       <label className="labelForm">Repeat password</label>
-      <input type="password" value={form.repeatPassword} placeholder="repeat password ..." name="repeatPassword" onChange={handleInput} />
+      <input type="password" value={form.repeatPassword} placeholder="repeat password ..." name="repeatPassword" onChange={handleInput} autoComplete="on" required />
       </div>
 
       <button className="authBtn" type="submit">Submit</button>

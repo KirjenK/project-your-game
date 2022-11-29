@@ -30,7 +30,10 @@ export default function Profile({ user }) {
   }, []);
 
   const gamesPlayed = stat?.length;
-  stat.length = 10;
+  console.log('===>>> 👉👉👉 file: Profile.jsx 👉👉👉 line 33 👉👉👉 stat', stat);
+  // if (stat?.length) { stat.length = 10; } else {
+  //   stat.length = 0;
+  // }
   return (
     loading ? (
       <div className="spinner-container">
@@ -55,7 +58,7 @@ export default function Profile({ user }) {
     </h2>
       </>
     )}
-    {stat?.map((el) => (
+    {stat && stat?.map((el) => (
       <div key={el.id} className="secondDiv">
         <div className="User">
           Когда была сыгранна игра :
