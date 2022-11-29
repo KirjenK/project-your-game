@@ -27,7 +27,6 @@ export default function Game() {
         setTimeout(() => {
           const btn = document.querySelectorAll('.originalBtn');
           if (res.btnDel) {
-            console.log('===>>> 👉👉👉 file: Game.jsx 👉👉👉 line 29 👉👉👉 res.btnDel', res.btnDel);
             res.btnDel.map((el) => btn[el - 1].setAttribute('disabled', 'true'));
             res.btnDel.map((el) => btn[el - 1].classList.remove('btn'));
             res.btnDel.map((el) => btn[el - 1].classList.add('disableBtn'));
@@ -139,7 +138,6 @@ export default function Game() {
     setAnswerInput('');
     setPTwo('containerTwo');
     setPOne('containerTwo');
-    setTimer(30);
 
     if (result.length === 25) {
       const curResult = result.reduce((acc, el) => acc + el, 0);
