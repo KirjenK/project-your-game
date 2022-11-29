@@ -170,7 +170,7 @@ export default function Game() {
       <p>{timer}</p>
     </div>
     <div className="currentsStats">
-         <h3> Current stats: {result?.reduce((acc, el) => acc + el, 0)}</h3>
+         <h3> Текущая статистика: {result?.reduce((acc, el) => acc + el, 0)}</h3>
     </div>
     </>
   );

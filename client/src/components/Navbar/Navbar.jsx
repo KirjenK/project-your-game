@@ -19,17 +19,23 @@ export default function Navbar({ user, setUser }) {
 
   const notAuthNav = () => (
     <>
-      <Link style={{ margin: '10px' }} to="/reg">Registration</Link>
-      <Link style={{ margin: '10px' }} to="/auth">Authorization</Link>
+      {/* <Link style={{ margin: '10px' }} to="/reg">Registration</Link>
+      <Link style={{ margin: '10px' }} to="/auth">Authorization</Link> */}
+      <Link style={{ margin: '10px' }} to="/reg">Регистрация</Link>
+      <Link style={{ margin: '10px' }} to="/auth">Авторизация</Link>
     </>
   );
 
   const authNav = () => (
     <>
-    <Link style={{ margin: '10px' }} to="/game">Game</Link>
+    {/* <Link style={{ margin: '10px' }} to="/game">Game</Link>
     <Link style={{ margin: '10px' }} to="/profile">Profile</Link>
     <Link style={{ margin: '10px' }} to="/stats">Top stats</Link>
-    <button onClick={handleLogout} type="button">Logout</button>
+    <button onClick={handleLogout} type="button">Logout</button> */}
+    <Link style={{ margin: '10px' }} to="/game">Играть</Link>
+    <Link style={{ margin: '10px' }} to="/profile">Профиль</Link>
+    <Link style={{ margin: '10px' }} to="/stats">Лучшие результаты</Link>
+    <button onClick={handleLogout} type="button">Выйти</button>
     </>
 
   );
