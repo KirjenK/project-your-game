@@ -3,9 +3,21 @@ const { Question, Game } = require('../../db/models');
 
 router.post('/', async (req, res) => {
   try {
-    const { curResult } = req.body;
-    console.log('===>>> 👉👉👉 file: addResultToBase.js 👉👉👉 line 7 👉👉👉 curResult', curResult);
-    await Game.create({ UserId: req.session.userId, result: curResult });
+    console.log('req. result === >>>', req.session.result);
+    console.log('user ID -------------------- >>>>>>>>> ', req.session.userId);
+    const { curResult, end } = req.body;
+    if (curResult) {
+      await Game.create({ UserId: req.session.userId, result: curResult });
+    } else if (end) {
+      if (req.session.result) {
+        const summResult = req.session.result.reduce((acc, el) => acc + el, 0);
+        await Game.create({ UserId: req.session.userId, result: summResult });
+        req.session.result = [0];
+        res.json({ message: 'finish', result: summResult });
+      } else {
+        res.json({ message: 'game over' });
+      }
+    }
   } catch (err) {
     console.log('Error ==>', err);
   }

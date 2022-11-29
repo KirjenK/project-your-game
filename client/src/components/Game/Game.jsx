@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './game.css';
 
 export default function Game() {
@@ -151,6 +151,32 @@ export default function Game() {
       });
     }
   };
+  const navigate = useNavigate();
+
+  const endGame = () => {
+    fetch('http://localhost:3001/addResultToBase', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ end: 'end' }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.message === 'game over') {
+          setTimeout(() => {
+            setResult([0]);
+          }, 100);
+          navigate('/');
+        } else if (res.message === 'finish') {
+          setTimeout(() => {
+            setResult([0]);
+          }, 100);
+          navigate('/profile');
+        }
+      });
+  };
 
   return (
     <>
@@ -182,6 +208,7 @@ export default function Game() {
       <p>{timer}</p>
     </div>
     <div className="currentsStats">
+          <button onClick={endGame} type="button">Закончить игру</button>
          <h3> Текущая статистика: {result?.reduce((acc, el) => acc + el, 0)}</h3>
     </div>
     </>
