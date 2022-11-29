@@ -12,6 +12,7 @@ export default function Game() {
   const [answerInput, setAnswerInput] = useState('');
   const [timer, setTimer] = useState(30);
   const [result, setResult] = useState([]);
+  const [btns, setBtns] = useState([]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -26,6 +27,7 @@ export default function Game() {
         setTimeout(() => {
           const btn = document.querySelectorAll('.originalBtn');
           if (res.btnDel) {
+            console.log('===>>> 👉👉👉 file: Game.jsx 👉👉👉 line 29 👉👉👉 res.btnDel', res.btnDel);
             res.btnDel.map((el) => btn[el - 1].setAttribute('disabled', 'true'));
             res.btnDel.map((el) => btn[el - 1].classList.remove('btn'));
             res.btnDel.map((el) => btn[el - 1].classList.add('disableBtn'));

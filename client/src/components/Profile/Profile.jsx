@@ -30,7 +30,7 @@ export default function Profile({ user }) {
   }, []);
 
   const gamesPlayed = stat?.length;
-
+  stat.length = 10;
   return (
     loading ? (
       <div className="spinner-container">
@@ -46,9 +46,14 @@ export default function Profile({ user }) {
 </h3>
     )}
     {bestResult?.result && (
-<h3>
+      <>
+    <h3>
       Лучший результат {bestResult.result} очков было набрано :з
-</h3>
+    </h3>
+    <h2>
+  Топ 10 игр
+    </h2>
+      </>
     )}
     {stat?.map((el) => (
       <div key={el.id} className="secondDiv">
