@@ -70,6 +70,7 @@ export default function Game() {
     setNewDiv('containerTwo');
     setAnswerInput('');
     setPTwo('containerTwo');
+    setPOne('containerTwo');
   };
 
   return (
