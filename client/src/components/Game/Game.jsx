@@ -200,7 +200,7 @@ export default function Game() {
     <div className={newDiv}>
       <div id={q?.price} className="qTitle">{q?.title}</div>
       <input placeholder="Введите ответ..." type="text" className="qTitle input" name="answer" value={answerInput} onChange={changeInput} />
-      <button type="button" className={`qTitle ${chiter}`} onClick={showAnswer}>Submit</button>
+      <button type="button" className={`qTitle ${chiter} authBtn`} onClick={showAnswer}>Submit</button>
       <p className={pOne}>Ответ верный !</p>
       <button type="button" className={pOne} onClick={goToTable}>Вернуться к таблице</button>
       <p className={pTwo}>
@@ -215,7 +215,7 @@ export default function Game() {
       )}
     </div>
     <div className="currentsStats">
-          <button className="qTitle" onClick={endGame} type="button">Закончить игру</button>
+          <button className="qTitle authBtn" onClick={endGame} type="button">Закончить игру</button>
          <h3> Текущая статистика: {result?.reduce((acc, el) => acc + el, 0)}</h3>
     </div>
     </>

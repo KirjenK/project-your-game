@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 export default function Navbar({ user, setUser }) {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Navbar({ user, setUser }) {
     <Link style={{ margin: '10px' }} to="/game">Играть</Link>
     <Link style={{ margin: '10px' }} to="/profile">Профиль</Link>
     <Link style={{ margin: '10px' }} to="/stats">Лучшие результаты</Link>
-    <button onClick={handleLogout} type="button">Выйти</button>
+    <button className="authBtn" onClick={handleLogout} type="button">Выйти</button>
     </>
 
   );
