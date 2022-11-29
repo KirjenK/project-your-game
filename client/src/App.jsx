@@ -7,10 +7,10 @@ import Reg from './components/Reg/Reg';
 import Stats from './components/Stats/Stats';
 import Profile from './components/Profile/Profile';
 import ProtectedRouter from './components/ProtectedRouter/ProtectedRouter';
+import MainPage from './components/MainPage/MainPage';
 
 function App() {
   const [user, setUser] = useState(null);
-  console.log('===>>> 👉👉👉 file: App.jsx 👉👉👉 line 13 👉👉👉 user', user);
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -20,7 +20,6 @@ function App() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log('res=>>>>>>>>useffect', res);
         setUser(res);
       });
 
@@ -31,7 +30,8 @@ function App() {
   return (
     <>
       <Navbar user={user} setUser={setUser} />
-  <Routes>
+      <Routes>
+      <Route path="/" element={<MainPage />} />
 
       <Route element={<ProtectedRouter user={user} />}>
         <Route path="/game" element={<Game user={user} setUser={setUser} />} />
@@ -44,7 +44,7 @@ function App() {
         <Route path="/auth" element={<Auth user={user} setUser={setUser} />} />
       </Route>
 
-  </Routes>
+      </Routes>
     </>
   );
 }

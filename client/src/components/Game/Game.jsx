@@ -13,7 +13,6 @@ export default function Game() {
   const [timer, setTimer] = useState(30);
   const [result, setResult] = useState([]);
 
-
   useEffect(() => {
     const abortController = new AbortController();
     fetch('http://localhost:3001/game', {
@@ -39,13 +38,25 @@ export default function Game() {
     const timeOut = setTimeout(() => {
       if (timer > 0) {
         setTimer(timer - 1);
-      } else {
+      } else if (timer === 0) {
         setMainDiv('container');
         setNewDiv('containerTwo');
         setAnswerInput('');
         setPTwo('containerTwo');
         setPOne('containerTwo');
-        setTimer(30);
+        clearTimeout(timeOut);
+        setTimer(null);
+        const qTitle = document.querySelector('.qTitle');
+        fetch('http://localhost:3001/result', {
+          method: 'post',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ price: qTitle.id }),
+        })
+          .then((res) => res.json())
+          .then((res) => setResult(res.currentResult));
       }
     }, 1000);
     return () => {
@@ -55,6 +66,7 @@ export default function Game() {
 
   const onClick = (e) => {
     setMainDiv('containerTwo');
+    setTimer(30);
 
     // e.target.textContent - Сколько стоит вопрос
 
@@ -84,6 +96,7 @@ export default function Game() {
   const showAnswer = () => {
     if (q?.answer === answerInput) {
       setPOne('showP');
+      setTimer(null);
       const titleEl = document?.querySelector('.qTitle');
       const title = titleEl.textContent;
       fetch('http://localhost:3001/result', {
@@ -96,11 +109,11 @@ export default function Game() {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log('===>>> 👉👉👉 file: Game.jsx 👉👉👉 line 78 👉👉👉 res', res);
           setResult(res.currentResult);
         });
-    } else {
+    } else if (q?.answer !== answerInput) {
       setPTwo('showP');
+      setTimer(null);
       const titleEl = document?.querySelector('.qTitle');
       const title = titleEl.textContent;
       fetch('http://localhost:3001/result', {
@@ -113,7 +126,6 @@ export default function Game() {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log('===>>> 👉👉👉 file: Game.jsx 👉👉👉 line 95 👉👉👉 res', res);
           setResult(res.currentResult);
         });
     }
@@ -126,7 +138,7 @@ export default function Game() {
     setPTwo('containerTwo');
     setPOne('containerTwo');
     setTimer(30);
-    
+
     if (result.length === 25) {
       const curResult = result.reduce((acc, el) => acc + el, 0);
       fetch('http://localhost:3001/addResultToBase', {
@@ -157,7 +169,7 @@ export default function Game() {
       ))}
     </div>
     <div className={newDiv}>
-      <div className="qTitle">{q?.title}</div>
+      <div id={q?.price} className="qTitle">{q?.title}</div>
       <input type="text" name="answer" value={answerInput} onChange={changeInput} />
       <button type="button" onClick={showAnswer}>Submit</button>
       <p className={pOne}>Ответ верный !</p>
